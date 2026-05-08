@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StudyMind AI — Question Answering System</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+<div class="particles" id="particles"></div>
+
+<!-- SIDEBAR -->
+<aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+        <div class="logo-icon">🎓</div>
+        <div>
+            <h2>StudyMind</h2>
+            <p>AI Tutor</p>
+        </div>
+    </div>
+
+    <nav class="subject-nav">
+        <div class="nav-label">SUBJECTS</div>
+        <button class="nav-item active" data-subject="All Subjects" onclick="setSubject(this)">
+            <span class="nav-emoji">📚</span> All Subjects
+        </button>
+        <button class="nav-item" data-subject="Mathematics" onclick="setSubject(this)">
+            <span class="nav-emoji">🔢</span> Mathematics
+        </button>
+        <button class="nav-item" data-subject="Physics" onclick="setSubject(this)">
+            <span class="nav-emoji">⚛️</span> Physics
+        </button>
+        <button class="nav-item" data-subject="Chemistry" onclick="setSubject(this)">
+            <span class="nav-emoji">🧪</span> Chemistry
+        </button>
+        <button class="nav-item" data-subject="Biology" onclick="setSubject(this)">
+            <span class="nav-emoji">🧬</span> Biology
+        </button>
+        <button class="nav-item" data-subject="Computer Science" onclick="setSubject(this)">
+            <span class="nav-emoji">💻</span> Computer Science
+        </button>
+        <button class="nav-item" data-subject="History" onclick="setSubject(this)">
+            <span class="nav-emoji">🏛️</span> History
+        </button>
+        <button class="nav-item" data-subject="English" onclick="setSubject(this)">
+            <span class="nav-emoji">📝</span> English
+        </button>
+        <button class="nav-item" data-subject="Urdu" onclick="setSubject(this)">
+            <span class="nav-emoji">✍️</span> Urdu
+        </button>
+        <button class="nav-item" data-subject="Islamiat" onclick="setSubject(this)">
+            <span class="nav-emoji">☪️</span> Islamiat
+        </button>
+    </nav>
+
+    <div class="sidebar-stats">
+        <div class="stat-item">
+            <span class="stat-num" id="q-count">0</span>
+            <span class="stat-label">Questions</span>
+        </div>
+        <div class="stat-item">
+            <span class="stat-num" id="session-time">0m</span>
+            <span class="stat-label">Session</span>
+        </div>
+    </div>
+</aside>
+
+<!-- MAIN AREA -->
+<main class="main-area">
+
+    <!-- TOP BAR -->
+    <header class="topbar">
+        <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
+        <div class="topbar-title">
+            <span id="current-subject-label">📚 All Subjects</span>
+        </div>
+        <button class="clear-btn-top" onclick="clearChat()">🗑 Clear</button>
+    </header>
+
+    <!-- CHAT AREA -->
+    <div class="chat-container" id="chat">
+        <div class="welcome-state">
+            <div class="welcome-icon">🎓</div>
+            <h3>Welcome to StudyMind AI</h3>
+            <p>Ask any study-related question and get instant, intelligent answers.</p>
+            <div class="quick-start">
+                <div class="qs-label">TRY THESE QUESTIONS</div>
+                <div class="qs-grid" id="suggestions-grid">
+                    <!-- Filled by JS -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- INPUT AREA -->
+    <div class="input-area">
+        <div class="subject-chips" id="subject-chips">
+            <button class="chip active" data-subject="All Subjects" onclick="setSubject(this, true)">📚 All</button>
+            <button class="chip" data-subject="Mathematics" onclick="setSubject(this, true)">🔢 Math</button>
+            <button class="chip" data-subject="Physics" onclick="setSubject(this, true)">⚛️ Physics</button>
+            <button class="chip" data-subject="Chemistry" onclick="setSubject(this, true)">🧪 Chem</button>
+            <button class="chip" data-subject="Biology" onclick="setSubject(this, true)">🧬 Bio</button>
+            <button class="chip" data-subject="Computer Science" onclick="setSubject(this, true)">💻 CS</button>
+        </div>
+        <div class="input-row">
+            <textarea id="question-input"
+                placeholder="(Press Enter to send)"
+                onkeydown="handleKey(event)"
+                oninput="autoResize(this)"></textarea>
+            <button class="send-btn" id="send-btn" onclick="askQuestion()">
+                <span id="send-icon">➤</span>
+            </button>
+        </div>
+        <div class="input-hint">Enter = Send &nbsp;|&nbsp; Shift+Enter = New line</div>
+    </div>
+
+</main>
+
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
